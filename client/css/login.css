@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: #E0E9EE;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  padding: 32px;
+  border-radius: 18px;
+  box-shadow: 0 0 28px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+.logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-size: 26px;
+  color: #034078;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #4a5b70;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.label {
+  text-align: left;
+  display: block;
+  font-size: 15px;
+  margin: 10px 0 5px;
+  color: #034078;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #b8c6d9;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  border-color: #034078;
+  outline: none;
+}
+
+.btn-login {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 17px;
+  background: #034078;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 600;
+}
+
+.btn-login:hover {
+  background: #022e56;
+}
+
+.errorBox {
+  color: red;
+  margin-top: 12px;
+  min-height: 22px;
+  font-size: 14px;
+}
+
+/* MOBILE FRIENDLY */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 24px;
+  }
+  .title {
+    font-size: 22px;
+  }
+  .logo {
+    width: 70px;
+    height: 70px;
+  }
+}
