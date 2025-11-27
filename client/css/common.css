@@ -1,0 +1,81 @@
+:root{
+  --bg:#f6f9fc;
+  --card:#ffffff;
+  --muted:#6b7f90;
+  --primary:#1475e0;
+  --danger:#e25959;
+  --radius:12px;
+  --shadow:0 8px 24px rgba(12,25,40,0.08);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#123}
+
+.app{display:flex;min-height:100vh}
+
+.sidebar{
+  width:260px;background:#fff;padding:20px;border-right:1px solid #e6eef6;
+  display:flex;flex-direction:column;gap:20px;position:sticky;top:0;min-height:100vh;
+}
+
+.brand{display:flex;gap:12px;align-items:center}
+.brand-logo{width:48px;height:48px;border-radius:8px;object-fit:cover}
+.brand-title{font-weight:700;color:#034078}
+.brand-sub{font-size:13px;color:var(--muted)}
+
+.nav{display:flex;flex-direction:column;gap:6px}
+.nav-item{
+  display:flex;gap:10px;padding:10px;border-radius:10px;border:0;
+  background:transparent;cursor:pointer;font-weight:600;color:#333;text-decoration:none;
+}
+.nav-item.active{background:#eaf4ff;color:var(--primary)}
+
+.main{flex:1;padding:28px}
+
+.main-header{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;
+}
+
+.btn{
+  padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;
+}
+.btn.primary{background:var(--primary);color:#fff}
+.btn.ghost{background:transparent;border:1px solid #bcd;color:var(--primary)}
+.btn.danger{background:var(--danger);color:#fff}
+
+.card{background:#fff;padding:20px;border-radius:12px;box-shadow:var(--shadow);max-width:900px}
+
+.form-row{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.form-row input, .form-row select{
+  padding:10px;border-radius:8px;border:1px solid #e6eef6;background:#fff;font-size:14px;
+}
+
+.form-actions{display:flex;gap:10px}
+
+/* SEARCH BAR */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-container {
+    flex: 1;
+    max-width: 460px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #e3eef8;
+    background: #fff;
+    font-size: 14px;
+    box-shadow: 0 4px 14px rgba(12, 25, 40, 0.04);
+}
+
+@media (max-width: 520px) {
+    .header-actions { flex-direction: column; align-items: stretch; }
+    .search-container { max-width: 100%; margin-bottom:10px; }
+}
