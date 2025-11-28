@@ -83,6 +83,7 @@
       </h3>
       <button id="closeModal" class="modal-close">✕</button>
     </div>
+  <form id="courseForm" class="modal-body">
     <div class="form-row"><label>Course Name</label><input id="title" required></div>
     <div class="form-row"><label>Course Code</label><input id="course_code" required></div>
     <div class="form-row"><label>Capacity</label><input id="capacity" type="number" min="0" required></div>
@@ -93,14 +94,16 @@
     <div class="form-row"><label>End Time</label><input id="end_time" type="time"></div>
     <div class="form-row"><label>Prerequisites</label><input id="prerequisites" placeholder="e.g. 1,4,7"></div>
     <div class="form-row"><label>Exam Time</label><input id="courseExamTime" placeholder="e.g. 2025/12/11 08:00"></div>
-      <div class="form-actions">
+
+    <div class="form-actions">
         <button type="submit" class="btn primary" id="saveCourseBtn">Save</button>
         <button type="button" class="btn ghost" id="cancelCourseBtn">Cancel</button>
-      </div>
-    </form>
+    </div>
+   </form>
+
   </div>
 </div>
-
-<script src="js/courses.js"></script>
 </body>
+<script src="js/courses.js"></script>
+</html>
 </html>
