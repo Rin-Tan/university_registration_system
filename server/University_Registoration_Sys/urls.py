@@ -26,7 +26,9 @@ from accounts.views import CustomLogoutView # View سفارشی که در مرح
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("courses/", views.courses_page, name="courses"),
+    path('courses/', include('courses.urls')),
+    path('dashboard/', include('main.urls')),
+
 
 
 

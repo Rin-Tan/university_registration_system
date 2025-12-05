@@ -10,7 +10,7 @@ const searchInput = document.getElementById("searchInput");
 let courses = [];
 let editId = null;
 
-const API_URL = "http://localhost:8000/courses/";
+const API_URL = "http://localhost:8000/courses/api/V1/courses/";
 
 // Open modal
 openAddBtn.addEventListener("click", () => {

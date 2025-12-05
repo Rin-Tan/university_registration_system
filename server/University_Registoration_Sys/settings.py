@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 "localhost",
- "127.0.0.1"
+"127.0.0.1"
 ]
 
 
@@ -43,25 +43,32 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
     'courses',
+    "main",
     'rest_framework_simplejwt',
     'accounts',
     
 ]
 
-MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
+MIDDLEWARE = [        
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+#CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
     "http://127.0.0.1:5500",
     "http://localhost:5500",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+
 ]
 
 
@@ -130,7 +137,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR.parent / "client",
 ]
