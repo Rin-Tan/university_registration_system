@@ -46,5 +46,3 @@ class CustomLogoutView(APIView):
                 {"detail": "Token is invalid or already blacklisted."}, 
                 status=status.HTTP_400_BAD_REQUEST
             )
-
-# توجه: این View باید در urls.py به مسیر 'api/sessions/current/' با متد DELETE متصل شود.
