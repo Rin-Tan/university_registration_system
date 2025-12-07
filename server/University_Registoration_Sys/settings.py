@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-gi(#39debk5y#74e*-^qpra7jcc4xm#ogcq!rvdv%^i%pl^$5k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1" # اضافه شده از تغییرات دوستتان
+]
 
 
 # Application definition
@@ -40,15 +43,15 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
     'courses',
+    "main", # اضافه شده از تغییرات دوستتان
     'rest_framework_simplejwt',
     'accounts',
-    
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    'django.contrib.sessions.middleware.SessionMiddleware', # جابجایی ترتیبی
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -59,6 +62,10 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
     "http://localhost:5500",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
 ]
 
 
@@ -67,7 +74,7 @@ ROOT_URLCONF = 'University_Registoration_Sys.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR.parent / "client"], # اضافه شده از تغییرات دوستتان
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,7 +134,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/' # تغییر در اینجا
+STATICFILES_DIRS = [ # اضافه شده از تغییرات دوستتان
+    BASE_DIR.parent / "client",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

@@ -10,7 +10,7 @@ const searchInput = document.getElementById("searchInput");
 let courses = [];
 let editId = null;
 
-const API_URL = "http://localhost:8000/courses/";
+const API_URL = "http://localhost:8000/courses/api/V1/courses/";
 
 // Open modal
 openAddBtn.addEventListener("click", () => {
@@ -116,8 +116,8 @@ function renderCourses(filter = "") {
       <td>${c.location}</td>
       <td>${c.start_time}</td>
       <td>${c.end_time}</td>
-      <td>${c.exam || ""}</td>
       <td>${c.prerequisites?.join(", ")}</td>
+      <td>${c.exam || ""}</td>
       <td class="actions-cell">
         <button class="btn-edit action-btn">Edit</button>
         <button class="btn-delete action-btn">Delete</button>

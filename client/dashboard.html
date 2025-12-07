@@ -1,10 +1,11 @@
+{% load static %}
 <!doctype html>
 <html lang="fa">
 <head>
   <meta charset="utf-8">
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="css/common.css">
-  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="{% static 'css/common.css' %}">
+  <link rel="stylesheet" href="{% static 'css/courses.css' %}">
 </head>
 <body>
 
@@ -13,7 +14,7 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="brand">
-      <img src="images/admin logo.svg" class="brand-logo">
+      <img src="{% static 'images/admin logo.svg' %}" class="brand-logo">
       <div>
         <div class="brand-title">Admin Dashboard</div>
         <div class="brand-sub">Course Management</div>
@@ -22,13 +23,14 @@
 
     <nav class="nav">
       <button class="nav-item active">
-        <img src="images/streamline-flex-color_dashboard-3-flat.svg" class="brand-logo-small">
+        <img src="{% static 'images/streamline-flex-color_dashboard-3-flat.svg'%}" class="brand-logo-small">
         Dashboard
       </button>
-      <button class="nav-item" onclick="window.location.href='courses.html'">
-        <img src="images/icon-park_book-one.svg" class="brand-logo-small">
-        Manage Courses
-      </button>
+      <button class="nav-item" onclick="window.location.href='{% url "courses_page" %}'">
+    <img src="{% static 'images/icon-park_book-one.svg' %}" class="brand-logo-small">
+    Manage Courses
+</button>
+
     </nav>
   </aside>
 
@@ -36,7 +38,7 @@
   <main class="main">
     <header class="main-header">
       <h2 class="title-with-logo">
-        <img src="images/streamline-flex-color_dashboard-3-flat.svg" class="title-icon">
+        <img src="{% static 'images/streamline-flex-color_dashboard-3-flat.svg' %}" class="title-icon">
         Dashboard
       </h2>
     </header>

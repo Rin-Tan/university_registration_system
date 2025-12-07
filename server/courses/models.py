@@ -10,9 +10,8 @@ class Course(models.Model):
     location = models.CharField(max_length=100)
     start_time = models.TimeField()
     end_time = models.TimeField()
-
     prerequisites = models.ManyToManyField("self", blank=True, symmetrical=False)
-
+    
 
     def __str__(self):
         return f'{self.course_code} - {self.title}'
