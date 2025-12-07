@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
     'courses',
+    'rest_framework_simplejwt',
+    'accounts',
     
 ]
 
@@ -131,3 +133,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+# تنظیمات Simple JWT
+SIMPLE_JWT = {
+    # فعال کردن قابلیت Blacklisting
+    'BLACK_LIST_AFTER_ROTATION': True, 
+    # اگر این را اضافه نکردی، الان اضافه کن
+    'ROTATE_REFRESH_TOKENS': True,  
+}
