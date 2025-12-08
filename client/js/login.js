@@ -41,7 +41,7 @@ form.addEventListener("submit", async (e) => {
     errorBox.style.color = "blue";
     errorBox.textContent = "Login successful! Redirecting...";
     setTimeout(() => {
-      window.location.href = "dashboard.html";
+      window.location.href =  "/dashboard/dashboard";
     }, 700);
 
   } catch (error) {
