@@ -56,7 +56,6 @@ courseForm.addEventListener("submit", async (e) => {
     start_time: document.getElementById("start_time").value,
     end_time: document.getElementById("end_time").value,
     prerequisites: parsePrerequisites(document.getElementById("prerequisites").value),
-    exam: document.getElementById("courseExamTime").value
   };
 
   try {
@@ -117,7 +116,6 @@ function renderCourses(filter = "") {
       <td>${c.start_time}</td>
       <td>${c.end_time}</td>
       <td>${c.prerequisites?.join(", ")}</td>
-      <td>${c.exam || ""}</td>
       <td class="actions-cell">
         <button class="btn-edit action-btn">Edit</button>
         <button class="btn-delete action-btn">Delete</button>
@@ -137,7 +135,7 @@ function renderCourses(filter = "") {
       document.getElementById("start_time").value = c.start_time;
       document.getElementById("end_time").value = c.end_time;
       document.getElementById("prerequisites").value = c.prerequisites?.join(", ");
-      document.getElementById("courseExamTime").value = c.exam || "";
+      //document.getElementById("courseExamTime").value = c.exam || "";
 
       modalOverlay.classList.remove("hidden");
     });
