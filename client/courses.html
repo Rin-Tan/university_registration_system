@@ -95,7 +95,19 @@
         <div class="form-row"><label>Course Code</label><input id="course_code" required></div>
         <div class="form-row"><label>Capacity</label><input id="capacity" type="number" min="0" required></div>
         <div class="form-row"><label>Units</label><input id="units" type="number" min="0" required></div>
-        <div class="form-row"><label>Day of week</label><input id="day_of_week" placeholder="e.g. Monday"></div>
+        <div class="form-row">
+     <label>Day of week</label>
+      <select id="day_of_week">
+          <option value="SAT">Saturday</option>
+          <option value="SUN">Sunday</option>
+          <option value="MON">Monday</option>
+          <option value="TUE">Tuesday</option>
+          <option value="WED">Wednesday</option>
+          <option value="THU">Thursday</option>
+         </select>
+        </div>
+
+
         <div class="form-row"><label>Location</label><input id="location"></div>
         <div class="form-row"><label>Start time</label><input id="start_time" type="time"></div>
         <div class="form-row"><label>End Time</label><input id="end_time" type="time"></div>
