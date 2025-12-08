@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
+from main.views import LoginRenderView
 # import‌های اضافه شده توسط دوستتان
 from courses import views 
 from rest_framework_simplejwt.views import (
@@ -10,6 +11,8 @@ from rest_framework_simplejwt.views import (
 from accounts.views import CustomLogoutView # View سفارشی که در مرحله ۲ می‌نویسیم
 
 urlpatterns = [
+        path('', LoginRenderView.as_view()),
+
     path('admin/', admin.site.urls),
     
     # مسیر دوستتان برای دسترسی به دوره‌ها
