@@ -3,6 +3,7 @@ from django.urls import path, include
 from main.views import LoginRenderView
 # import‌های اضافه شده توسط دوستتان
 from courses import views 
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -23,7 +24,6 @@ urlpatterns = [
     
     # مسیر قدیمی شما که احتمالا دیگر لازم نیست اما برای اطمینان نگه می‌داریم
     # اگر پروژه شما به آن نیاز ندارد می‌توانید حذف کنید، اما فعلا نگه می‌داریم
-    # path('',include('courses.urls')), 
     
     
     # 1. ورود (POST /api/sessions/): ایجاد منبع نشست
@@ -35,5 +35,9 @@ urlpatterns = [
     # 3. خروج (DELETE /api/sessions/current/): حذف منبع نشست
     # ما از CustomLogoutView استفاده می‌کنیم تا بتوانیم متد DELETE را بپذیریم.
     path('api/sessions/current/', CustomLogoutView.as_view(), name='logout'),
+
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+
+     path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 
 ]
