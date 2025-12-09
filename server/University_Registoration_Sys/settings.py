@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
     'courses',
-    "main"
+    "main",
     'rest_framework_simplejwt',
     'accounts',
     "drf_spectacular",
