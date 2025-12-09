@@ -16,7 +16,7 @@ class CourseListCreateTest(APITestCase):
             "title": title,
             "capacity": 30,
             "units": 3,
-            "day_of_week": "Monday",
+            "day_of_week": "MON",
             "location": "Room 101",
             "start_time": time(9, 0),
             "end_time": time(10, 30),
@@ -27,34 +27,34 @@ class CourseListCreateTest(APITestCase):
         Course.objects.create(**self.create_course_data(code="CS101", title="Course 1"))
         Course.objects.create(**self.create_course_data(code="CS102", title="Course 2"))
 
-        # Act
+
         response = self.client.get(self.url)
 
-        # Assert
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
 
     def test_create_course_success(self):
-        # Arrange
+
         data = self.create_course_data(code="CS103", title="New Course")
 
-        # Act
+
         response = self.client.post(self.url, data, format='json')
 
-        # Assert
+
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['course_code'], "CS103")
         self.assertEqual(response.data['title'], "New Course")
 
     def test_create_course_missing_field(self):
-        # Arrange: حذف course_code که ضروری است
+
         data = self.create_course_data()
         data.pop("course_code")
 
-        # Act
+
         response = self.client.post(self.url, data, format='json')
 
-        # Assert
+
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('course_code', response.data)
 
@@ -67,7 +67,7 @@ class CourseRetrieveUpdateDestroyTest(APITestCase):
             title="Existing Course",
             capacity=30,
             units=3,
-            day_of_week="Tuesday",
+            day_of_week="TUE",
             location="Room 202",
             start_time=time(10,0),
             end_time=time(11,30),
@@ -85,7 +85,7 @@ class CourseRetrieveUpdateDestroyTest(APITestCase):
             "title": "Updated Course",
             "capacity": 35,
             "units": 4,
-            "day_of_week": "Tuesday",
+            "day_of_week": "TUE",
             "location": "Room 202",
             "start_time": time(10,0),
             "end_time": time(11,30),
