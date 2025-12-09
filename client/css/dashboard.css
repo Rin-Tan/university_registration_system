@@ -1,0 +1,109 @@
+/* DASHBOARD PAGE */
+
+/* کارت خوش آمدگویی */
+.dashboard-welcome {
+  font-size: 18px;
+  color: #234;
+  margin-top: 12px;
+}
+
+/* بخش اصلی داشبورد */
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* کارت‌ها */
+.dashboard-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(12, 25, 40, 0.08);
+  max-width: 900px;
+}
+
+/* تیتر کارت */
+.dashboard-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  color: #034078;
+}
+
+/* متن کارت */
+.dashboard-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #556;
+  line-height: 1.5;
+}
+
+/* ریسپانسیو */
+@media (max-width: 920px) {
+  .dashboard-card {
+    width: 100%;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .dashboard-main {
+    gap: 12px;
+  }
+  .dashboard-card h3 {
+    font-size: 18px;
+  }
+  .dashboard-card p {
+    font-size: 13px;
+  }
+}
+
+/* آیکون‌ها */
+.title-with-logo,
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.brand-logo-small {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #fff;
+  border-right: 1px solid #e6eef6;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  box-shadow: 0 8px 30px rgba(2,20,40,0.03);
+}
+
+.nav{display:flex;flex-direction:column;gap:6px;padding-top:6px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:0;background:transparent;cursor:pointer;font-weight:600;text-align:left;}
+.nav-item.active{background:#eaf4ff;color:#1475e0;}
+
+/* Main */
+.main{flex:1;padding:28px;overflow:auto;}
+.main-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:18px;}
