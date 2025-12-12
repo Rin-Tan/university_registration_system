@@ -1,0 +1,84 @@
+{% load static %}
+<!doctype html>
+<html lang="fa">
+<head>
+  <meta charset="utf-8">
+  <title>Courses</title>
+
+  <link rel="stylesheet" href="{% static 'css/common.css' %}">
+  <link rel="stylesheet" href="{% static 'css/courses.css' %}">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="{% static 'images/student-logo.svg' %}" class="brand-logo" alt="Logo">
+        <div>
+          <div class="brand-title">Student Panel</div>
+          <div class="brand-sub">Courses</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+
+        <button class="nav-item" onclick="window.location.href='{% url 'student_dashboard' %}'">
+          <img src="{% static 'images/streamline-flex-color_dashboard-3-flat.svg' %}" class="brand-logo-small">
+          Dashboard
+        </button>
+
+        <button class="nav-item active">
+          <img src="{% static 'images/icon-park_book-one.svg' %}" class="brand-logo-small">
+          Courses Offered
+        </button>
+
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+      <header class="main-header">
+        <h2 class="title-with-logo">
+          <img src="{% static 'images/hugeicons_course.svg' %}" class="title-icon" alt="Courses">
+          Courses
+        </h2>
+
+        <div class="header-actions">
+          <input type="text" id="searchInput" placeholder="Search courses..." class="search-input">
+        </div>
+      </header>
+
+      <section>
+        <div class="table-wrap">
+          <table class="courses-table">
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Code</th>
+                <th>Capacity</th>
+                <th>Units</th>
+                <th>Day</th>
+                <th>Location</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Prerequisites</th>
+              </tr>
+            </thead>
+            <tbody id="coursesTbody"></tbody>
+          </table>
+
+          <div id="emptyState" class="empty-state">No courses found.</div>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  <script src="{% static 'js/studentCourses.js' %}"></script>
+</body>
+</html>
