@@ -6,12 +6,17 @@ form.addEventListener("submit", async (e) => {
 
   const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value.trim();
-
+  const captchaResponse = grecaptcha.getResponse();
+if (!captchaResponse) {
+  errorBox.textContent = "Please check the captcha.";
+  return;
+}
   // Validate empty fields
   if (!username || !password) {
     errorBox.textContent = "Please enter both username and password.";
     return;
   }
+
 
   try {
     // Send login request to Django API
@@ -20,18 +25,32 @@ form.addEventListener("submit", async (e) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        "g-recaptcha-response": captchaResponse  
+      })
     });
+    
+    // Parse response JSON (contains access + refresh tokens)
+    const data = await response.json();
 
     // If login failed (401)
     if (!response.ok) {
-      errorBox.style.color = "red";
-      errorBox.textContent = "Incorrect username or password.";
-      return;
-    }
+  errorBox.style.color = "red";
 
-    // Parse response JSON (contains access + refresh tokens)
-    const data = await response.json();
+    //invalid-captcha
+  if (data.error === "invalid-captcha") {
+    errorBox.textContent = "Captcha validation failed. Please try again.";
+    grecaptcha.reset(); 
+  } else {
+    errorBox.textContent = "Incorrect username or password.";
+  }
+
+  return;
+   }
+
+
 
     // Store JWT tokens in localStorage
     localStorage.setItem("access", data.access);
