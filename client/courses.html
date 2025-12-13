@@ -110,8 +110,19 @@
         <div class="form-row"><label>Location</label><input id="location"></div>
         <div class="form-row"><label>Start time</label><input id="start_time" type="time"></div>
         <div class="form-row"><label>End Time</label><input id="end_time" type="time"></div>
-        <div class="form-row"><label>Prerequisites</label><input id="prerequisites" placeholder="e.g. 1,4,7"></div>
-      <!--  <div class="form-row"><label>Exam Time</label><input id="courseExamTime" type="datetime-local" placeholder="e.g. 2025-12-11T08:00"></div>-->
+        <div class="form-row"> <label>Prerequisites</label>
+
+        <input
+         type="text"
+         id="prereqSearch"
+         placeholder="Search courses..."
+         class="search-input"
+         onkeyup="filterPrerequisites()"
+         >
+          <select id="prerequisites" multiple size="6"></select>
+        </div>
+
+  <!--  <div class="form-row"><label>Exam Time</label><input id="courseExamTime" type="datetime-local" placeholder="e.g. 2025-12-11T08:00"></div>-->
 
         <div class="form-actions">
             <button type="submit" class="btn primary" id="saveCourseBtn">Save</button>

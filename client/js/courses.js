@@ -9,15 +9,26 @@ const searchInput = document.getElementById("searchInput");
 
 let courses = [];
 let editId = null;
+let allCourses = [];
+coursesLoaded = true;
 
 const API_URL = "http://localhost:8000/courses/api/V1/courses/";
 
 // Open modal
 openAddBtn.addEventListener("click", () => {
+  if (!coursesLoaded) {
+    alert("Courses are still loading, please wait...");
+    return;
+  }
+
   modalOverlay.classList.remove("hidden");
   courseForm.reset();
   editId = null;
+
+  fillPrerequisites(null);  
+  document.getElementById("prereqSearch").value = "";
 });
+
 
 // Close modal
 closeModal.addEventListener("click", () => modalOverlay.classList.add("hidden"));
@@ -29,18 +40,42 @@ async function loadCourses() {
   try {
     const res = await fetch(API_URL);
     courses = await res.json();
+    allCourses = courses; 
+    coursesLoaded = true;
     renderCourses();
   } catch (err) {
     console.error("Load failed:", err);
   }
 }
+console.log("ALL COURSES:", allCourses);
 
-// Convert prerequisites text → array
-function parsePrerequisites(value) {
-  if (!value.trim()) return [];
-  return value.split(",").map(num => Number(num.trim())).filter(n => !isNaN(n));
+
+function fillPrerequisites(excludeId = null) {
+  console.log("FILLING PREREQUISITES", allCourses.length);
+
+  const select = document.getElementById("prerequisites");
+  select.innerHTML = "";
+
+  allCourses.forEach(course => {
+    if (course.id === excludeId) return;
+
+    const opt = document.createElement("option");
+    opt.value = course.id;
+    opt.textContent = `${course.title} (${course.course_code})`;
+    select.appendChild(opt);
+  });
 }
 
+function filterPrerequisites() {
+  const q = document.getElementById("prereqSearch").value.toLowerCase();
+  const options = document.getElementById("prerequisites").options;
+
+  Array.from(options).forEach(opt => {
+    opt.style.display = opt.textContent.toLowerCase().includes(q)
+      ? "block"
+      : "none";
+  });
+}
 
 // Submit (Add / Edit)
 courseForm.addEventListener("submit", async (e) => {
@@ -55,7 +90,7 @@ courseForm.addEventListener("submit", async (e) => {
     location: document.getElementById("location").value,
     start_time: document.getElementById("start_time").value,
     end_time: document.getElementById("end_time").value,
-    prerequisites: parsePrerequisites(document.getElementById("prerequisites").value),
+    prerequisites: Array.from(document.getElementById("prerequisites").selectedOptions).map(o => Number(o.value)),
   };
 
   try {
@@ -85,6 +120,16 @@ courseForm.addEventListener("submit", async (e) => {
   }
 });
 
+function getPrerequisiteTitles(prereqIds = []) {
+  if (!prereqIds.length) return "-";
+
+  return prereqIds
+    .map(id => {
+      const course = allCourses.find(c => c.id === id);
+      return course ? `${course.title}[${course.course_code}]` : `#${id}`;
+    })
+    .join(" - ");
+}
 
 // Render table
 function renderCourses(filter = "") {
@@ -115,7 +160,7 @@ function renderCourses(filter = "") {
       <td>${c.location}</td>
       <td>${c.start_time}</td>
       <td>${c.end_time}</td>
-      <td>${c.prerequisites?.join(", ")}</td>
+      <td>${getPrerequisiteTitles(c.prerequisites)}</td>
       <td class="actions-cell">
         <button class="btn-edit action-btn">Edit</button>
         <button class="btn-delete action-btn">Delete</button>
@@ -134,7 +179,15 @@ function renderCourses(filter = "") {
       document.getElementById("location").value = c.location;
       document.getElementById("start_time").value = c.start_time;
       document.getElementById("end_time").value = c.end_time;
-      document.getElementById("prerequisites").value = c.prerequisites?.join(", ");
+      fillPrerequisites(c.id);
+
+const prereqIds = c.prerequisites || [];
+Array.from(document.getElementById("prerequisites").options).forEach(opt => {
+  opt.selected = prereqIds.includes(Number(opt.value));
+});
+
+document.getElementById("prereqSearch").value = "";
+
       //document.getElementById("courseExamTime").value = c.exam || "";
 
       modalOverlay.classList.remove("hidden");
