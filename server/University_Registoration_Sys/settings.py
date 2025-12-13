@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",
-    "127.0.0.1" # اضافه شده از تغییرات دوستتان
+    "127.0.0.1" 
 ]
 
 
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
     'courses',
-    "main", # اضافه شده از تغییرات دوستتان
+    "main",
     'rest_framework_simplejwt',
     'accounts',
     "drf_spectacular",
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     "corsheaders.middleware.CorsMiddleware",
-    'django.contrib.sessions.middleware.SessionMiddleware', # جابجایی ترتیبی
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -77,7 +77,7 @@ ROOT_URLCONF = 'University_Registoration_Sys.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR.parent / "client"], # اضافه شده از تغییرات دوستتان
+        'DIRS': [BASE_DIR.parent / "client"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,8 +137,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/' # تغییر در اینجا
-STATICFILES_DIRS = [ # اضافه شده از تغییرات دوستتان
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [ 
     BASE_DIR.parent / "client",
 ]
 
@@ -156,10 +156,9 @@ REST_FRAMEWORK = {
     
 }
 
-# تنظیمات Simple JWT
 SIMPLE_JWT = {
-    # فعال کردن قابلیت Blacklisting
     'BLACK_LIST_AFTER_ROTATION': True, 
-    # اگر این را اضافه نکردی، الان اضافه کن
     'ROTATE_REFRESH_TOKENS': True,  
 }
+# Google reCAPTCHA Secret Key
+RECAPTCHA_SECRET_KEY = "6LeDUyksAAAAAKT98inIIZ8gRLD3draLhTMZwthp"
