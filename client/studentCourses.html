@@ -80,5 +80,10 @@
   </div>
 
   <script src="{% static 'js/studentCourses.js' %}"></script>
+  <script>
+  if (!localStorage.getItem("access_token")) {
+    window.location.href = "/";
+  }
+</script>
 </body>
 </html>
