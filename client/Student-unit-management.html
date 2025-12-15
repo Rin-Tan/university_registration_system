@@ -24,7 +24,8 @@
         <img src="{% static 'images/admin logo.svg' %}" class="brand-logo" alt="Admin Logo">
         <div>
           <div class="brand-title">Admin Dashboard</div>
-          <div class="brand-sub">Course Management</div>
+          <div class="brand-sub">Student unit management</div>
+
         </div>
       </div>
 
@@ -37,7 +38,12 @@
           <img src="{% static 'images/icon-park_book-one.svg' %}" class="brand-logo-small" alt="Manage Courses">
           Manage Courses
         </button>
+         <button class="nav-item" onclick="window.location.href='{% url 'unit' %}'"> 
+           <img src="{% static images/carbon_id-management.svg' %}" class="brand-logo-small" alt="Dashboard">
+          Student unit management
+        </button>
       </nav>
+      <!--تا اینجا ادیت کردم -->
     </aside>
 
     <!-- MAIN CONTENT -->
@@ -85,7 +91,7 @@
       <div class="modal-header">
         <h3 id="modalTitle" class="title-with-logo">
           <img src="{% static 'images/icon-park_edit-two.svg' %}" class="title-icon-small" alt="Edit Course">
-          Add / Edit Course
+          Student unit management
         </h3>
         <button id="closeModal" class="modal-close">✕</button>
       </div>
@@ -112,17 +118,6 @@
         <div class="form-row"><label>End Time</label><input id="end_time" type="time"></div>
         <div class="form-row"> <label>Prerequisites</label>
 
-        <input
-         type="text"
-         id="prereqSearch"
-         placeholder="Search courses..."
-         class="search-input"
-         onkeyup="filterPrerequisites()"
-         >
-          <select id="prerequisites" multiple size="6"></select>
-        </div>
-
-  <!--  <div class="form-row"><label>Exam Time</label><input id="courseExamTime" type="datetime-local" placeholder="e.g. 2025-12-11T08:00"></div>-->
 
         <div class="form-actions">
             <button type="submit" class="btn primary" id="saveCourseBtn">Save</button>
@@ -134,12 +129,9 @@
   
 
   <script src="{% static 'js/courses.js' %}"></script>
-  
-<script>
-  if (!localStorage.getItem("access_token")) {
-    window.location.href = "/";
-  }
-</script>
+  <script>
 
+    
+  </script>
 </body>
 </html>
