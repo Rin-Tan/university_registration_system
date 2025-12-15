@@ -12,7 +12,7 @@ let editId = null;
 let allCourses = [];
 coursesLoaded = true;
 
-const API_URL = "http://localhost:8000/courses/api/V1/courses/";
+const API_URL = "http://localhost:8000/courses/api/v1/courses/";
 
 // Open modal
 openAddBtn.addEventListener("click", () => {

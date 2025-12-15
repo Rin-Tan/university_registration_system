@@ -4,7 +4,7 @@ const searchInput = document.getElementById("searchInput");
 
 let courses = [];
 
-const API_URL = "http://localhost:8000/courses/api/V1/courses/";
+const API_URL = "http://localhost:8000/courses/api/v1/courses/";
 
 // Load all courses
 async function loadCourses() {
