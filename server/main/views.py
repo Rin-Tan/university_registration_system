@@ -6,8 +6,9 @@ def dashboard(request):
 def student_unit_management(request):
     return render(request, 'student_unit_management.html')
 
-def studentCourses(request):
-    return render(request, 'studentCourses.html')
+class StudentCourseView(View):
+    def get(self, request):
+        return render(request, 'studentCourses.html')
 
 class LoginRenderView(View):
     def get(self, request):

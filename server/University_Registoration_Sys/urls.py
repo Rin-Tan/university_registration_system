@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from main.views import LoginRenderView
+from main.views import LoginRenderView, StudentCourseView
 from courses import views 
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework_simplejwt.views import (
@@ -20,6 +20,7 @@ urlpatterns = [
     
     path('dashboard/', include('main.urls')),
     
+    path('student/courses', StudentCourseView.as_view(), name='student_courses'),
     
     
     path('api/sessions/', CustomLoginView.as_view(), name='token_obtain_pair'),
