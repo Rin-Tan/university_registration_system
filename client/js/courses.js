@@ -10,9 +10,60 @@ const searchInput = document.getElementById("searchInput");
 let courses = [];
 let editId = null;
 let allCourses = [];
-coursesLoaded = true;
+let coursesLoaded = true;
+const TIME_API_URL = "http://localhost:8000/courses/api/v1/timeslots/";
+const API_URL = "http://localhost:8000/courses/api/v1/courses/";
 
-const API_URL = "http://localhost:8000/courses/api/V1/courses/";
+async function loadTimeSlots() {
+  try {
+    const res = await fetch(TIME_API_URL);
+
+    if (!res.ok) throw new Error("TimeSlot fetch failed");
+
+    const slots = await res.json();
+    const select = document.getElementById("timeSlots");
+
+    if (!select) {
+      console.error("timeSlots select not found in DOM");
+      return;
+    }
+
+    select.innerHTML = "";
+
+    if (slots.length === 0) {
+      const opt = document.createElement("option");
+      opt.textContent = "No time slots available";
+      opt.disabled = true;
+      select.appendChild(opt);
+      return;
+    }
+
+    slots.forEach(slot => {
+      const opt = document.createElement("option");
+      opt.value = slot.id;
+      opt.textContent =
+        `${slot.day_display} | ${slot.start_time.slice(0,5)} - ${slot.end_time.slice(0,5)}`;
+      select.appendChild(opt);
+    });
+
+  } catch (err) {
+    console.error(err);
+    notify("Failed to load time slots", "error");
+  }
+}
+
+
+function notify(message, type = "success") {
+  const box = document.getElementById("notification");
+
+  box.textContent = message;
+  box.className = "notification " + type;
+  box.classList.remove("hidden");
+
+  setTimeout(() => {
+    box.classList.add("hidden");
+  }, 3000);
+}
 
 // Open modal
 openAddBtn.addEventListener("click", () => {
@@ -27,6 +78,8 @@ openAddBtn.addEventListener("click", () => {
 
   fillPrerequisites(null);  
   document.getElementById("prereqSearch").value = "";
+  
+   loadTimeSlots();
 });
 
 
@@ -82,16 +135,21 @@ courseForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const payload = {
-    title: document.getElementById("title").value,
-    course_code: document.getElementById("course_code").value,
-    capacity: Number(document.getElementById("capacity").value),
-    units: Number(document.getElementById("units").value),
-    day_of_week: document.getElementById("day_of_week").value,
-    location: document.getElementById("location").value,
-    start_time: document.getElementById("start_time").value,
-    end_time: document.getElementById("end_time").value,
-    prerequisites: Array.from(document.getElementById("prerequisites").selectedOptions).map(o => Number(o.value)),
-  };
+  title: document.getElementById("title").value,
+  course_code: document.getElementById("course_code").value,
+  capacity: Number(document.getElementById("capacity").value),
+  units: Number(document.getElementById("units").value),
+  location: document.getElementById("location").value,
+  prerequisites: Array.from(
+    document.getElementById("prerequisites").selectedOptions
+  ).map(o => Number(o.value)),
+  time_slots: Array.from(
+    document.getElementById("timeSlots").selectedOptions
+  ).map(o => Number(o.value))
+};
+
+
+
 
   try {
     let res;
@@ -110,12 +168,19 @@ courseForm.addEventListener("submit", async (e) => {
       });
     }
 
-    if (!res.ok) throw new Error("Saving failed");
+    if (!res.ok) throw new Error();
+    notify(
+  editId ? "Course updated successfully" : "Course added successfully",
+  "success"
+  );
+
 
     modalOverlay.classList.add("hidden");
     loadCourses();
 
   } catch (err) {
+    notify("Operation failed", "error");
+
     console.error("Error saving course:", err);
   }
 });
@@ -150,16 +215,20 @@ function renderCourses(filter = "") {
 
   filtered.forEach(c => {
     const tr = document.createElement("tr");
+    const times = c.time_slots_details?.length
+  ? c.time_slots_details
+      .map(t => `${t.day_display} ${t.start_time.slice(0,5)}-${t.end_time.slice(0,5)}`)
+      .join("<br>")
+  : "-";
+
 
     tr.innerHTML = `
       <td>${c.title}</td>
       <td>${c.course_code}</td>
       <td>${c.capacity}</td>
       <td>${c.units}</td>
-      <td>${c.day_of_week}</td>
+      <td>${times}</td>
       <td>${c.location}</td>
-      <td>${c.start_time}</td>
-      <td>${c.end_time}</td>
       <td>${getPrerequisiteTitles(c.prerequisites)}</td>
       <td class="actions-cell">
         <button class="btn-edit action-btn">Edit</button>
@@ -175,10 +244,17 @@ function renderCourses(filter = "") {
       document.getElementById("course_code").value = c.course_code;
       document.getElementById("capacity").value = c.capacity;
       document.getElementById("units").value = c.units;
-      document.getElementById("day_of_week").value = c.day_of_week;
+      const selectedIds = c.time_slots_details
+      ? c.time_slots_details.map(t => t.id)
+      : [];
+      Array.from(document.getElementById("timeSlots").options).forEach(opt => {
+          opt.selected = selectedIds.includes(Number(opt.value));
+        });
+        notify("Course loaded for editing", "info");
+
+
       document.getElementById("location").value = c.location;
-      document.getElementById("start_time").value = c.start_time;
-      document.getElementById("end_time").value = c.end_time;
+
       fillPrerequisites(c.id);
 
 const prereqIds = c.prerequisites || [];
@@ -198,8 +274,10 @@ document.getElementById("prereqSearch").value = "";
       if (confirm(`Delete ${c.title}?`)) {
         try {
           await fetch(API_URL + c.id + "/", { method: "DELETE" });
+            notify("Course deleted successfully", "success");
           loadCourses();
         } catch (err) {
+          notify("Delete failed", "error");
           console.error("Delete failed:", err);
         }
       }
@@ -215,4 +293,5 @@ searchInput.addEventListener("input", () => renderCourses(searchInput.value));
 
 
 // Initial load
+loadTimeSlots();
 loadCourses();

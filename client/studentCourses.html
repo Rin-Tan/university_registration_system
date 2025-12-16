@@ -27,11 +27,6 @@
 
       <nav class="nav">
 
-        <button class="nav-item" onclick="window.location.href='{% url 'student_dashboard' %}'">
-          <img src="{% static 'images/streamline-flex-color_dashboard-3-flat.svg' %}" class="brand-logo-small">
-          Dashboard
-        </button>
-
         <button class="nav-item active">
           <img src="{% static 'images/icon-park_book-one.svg' %}" class="brand-logo-small">
           Courses Offered
@@ -62,10 +57,8 @@
                 <th>Code</th>
                 <th>Capacity</th>
                 <th>Units</th>
-                <th>Day</th>
+                <th>Time Slot</th>
                 <th>Location</th>
-                <th>Start</th>
-                <th>End</th>
                 <th>Prerequisites</th>
               </tr>
             </thead>
@@ -80,5 +73,10 @@
   </div>
 
   <script src="{% static 'js/studentCourses.js' %}"></script>
+  <script>
+  if (!localStorage.getItem("access_token")) {
+    window.location.href = "/";
+  }
+</script>
 </body>
 </html>

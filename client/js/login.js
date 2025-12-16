@@ -20,7 +20,7 @@ if (!captchaResponse) {
 
   try {
     // Send login request to Django API
-    const response = await fetch("http://localhost:8000/api/sessions/", {
+    const response = await fetch("/api/sessions/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,6 +38,7 @@ if (!captchaResponse) {
     // If login failed (401)
     if (!response.ok) {
   errorBox.style.color = "red";
+  
 
     //invalid-captcha
   if (data.error === "invalid-captcha") {
@@ -52,15 +53,20 @@ if (!captchaResponse) {
 
 
 
+
     // Store JWT tokens in localStorage
-    localStorage.setItem("access", data.access);
-    localStorage.setItem("refresh", data.refresh);
+localStorage.setItem("access_token", data.access);
+localStorage.setItem("refresh_token", data.refresh);
+document.cookie = `access_token=${data.access}; path=/`;
+
+
+
 
     // Redirect after success
     errorBox.style.color = "blue";
     errorBox.textContent = "Login successful! Redirecting...";
     setTimeout(() => {
-      window.location.href =  "/dashboard";
+     window.location.href = "/dashboard/";
     }, 700);
 
   } catch (error) {

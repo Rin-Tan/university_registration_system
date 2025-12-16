@@ -24,18 +24,18 @@
         <img src="{% static 'images/admin logo.svg' %}" class="brand-logo" alt="Admin Logo">
         <div>
           <div class="brand-title">Admin Dashboard</div>
-          <div class="brand-sub">Course Management</div>
+          <div class="brand-sub"> Management</div>
         </div>
       </div>
 
       <nav class="nav">
-        <button class="nav-item" onclick="window.location.href='{% url 'dashboard' %}'"> 
-           <img src="{% static 'images/streamline-flex-color_dashboard-3-flat.svg' %}" class="brand-logo-small" alt="Dashboard">
-          Dashboard
-        </button>
-        <button class="nav-item active">
-          <img src="{% static 'images/icon-park_book-one.svg' %}" class="brand-logo-small" alt="Manage Courses">
+        <button class="nav-item active" > 
+           <img src="{% static 'images/icon-park_book-one.svg' %}"class="brand-logo-small" alt="Manage Courses">
           Manage Courses
+        </button>
+        <button class="nav-item " onclick="window.location.href='{% url 'student_unit_manager' %}'">
+          <img src="{% static 'images/carbon_id-management.svg' %}" class="brand-logo-small" alt="Unit Settings">
+          Unit Settings
         </button>
       </nav>
     </aside>
@@ -62,10 +62,8 @@
                 <th>Code</th>
                 <th>Capacity</th>
                 <th>Units</th>
-                <th>Day of Week</th>
+                <th>Schedule</th>
                 <th>Location</th>
-                <th>Start Time</th>
-                <th>End Time</th>
                 <th>Prerequisites</th> 
                 <th>Actions</th>
               </tr>
@@ -93,25 +91,10 @@
         <div class="form-row"><label>Course Name</label><input id="title" required></div>
         <div class="form-row"><label>Course Code</label><input id="course_code" required></div>
         <div class="form-row"><label>Capacity</label><input id="capacity" type="number" min="1" required></div>
-        <div class="form-row"><label>Units</label><input id="units" type="number" min="1" required></div>
-        <div class="form-row">
-     <label>Day of week</label>
-      <select id="day_of_week">
-          <option value="SAT">Saturday</option>
-          <option value="SUN">Sunday</option>
-          <option value="MON">Monday</option>
-          <option value="TUE">Tuesday</option>
-          <option value="WED">Wednesday</option>
-          <option value="THU">Thursday</option>
-         </select>
-        </div>
-
-
+        <div class="form-row"><label>Units</label><input id="units" type="number" min="1" max="5"></div>
+        <div class="form-row"><label>Time Slots</label><select id="timeSlots" multiple size="5"></select></div>
         <div class="form-row"><label>Location</label><input id="location"></div>
-        <div class="form-row"><label>Start time</label><input id="start_time" type="time"></div>
-        <div class="form-row"><label>End Time</label><input id="end_time" type="time"></div>
         <div class="form-row"> <label>Prerequisites</label>
-
         <input
          type="text"
          id="prereqSearch"
@@ -134,9 +117,13 @@
   
 
   <script src="{% static 'js/courses.js' %}"></script>
-  <script>
+  
+<script>
+  if (!localStorage.getItem("access_token")) {
+    window.location.href = "/";
+  }
+</script>
+<div id="notification" class="notification hidden"></div>
 
-    
-  </script>
 </body>
 </html>
