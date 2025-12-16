@@ -57,7 +57,6 @@ if (!captchaResponse) {
     // Store JWT tokens in localStorage
 localStorage.setItem("access_token", data.access);
 localStorage.setItem("refresh_token", data.refresh);
-console.log("ACCESS TOKEN:", data.access);
 document.cookie = `access_token=${data.access}; path=/`;
 alert(document.cookie);
 
