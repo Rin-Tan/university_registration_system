@@ -29,6 +29,5 @@ class CourseSerializer(serializers.ModelSerializer):
         'time_slots_details',
         'location',
         'prerequisites',
-        'professor',
-        'students',
+        'professor'
         ]    

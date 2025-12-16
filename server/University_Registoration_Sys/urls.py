@@ -19,6 +19,8 @@ urlpatterns = [
     path('courses/', include('courses.urls')), 
     
     path('dashboard/', include('main.urls')),
+
+    path('accounts/', include('accounts.urls')),
     
     path('student/courses', StudentCourseView.as_view(), name='student_courses'),
 
