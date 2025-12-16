@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/courses.css' %}">
+
 </head>
 <body>
 
@@ -21,29 +23,38 @@
         <div class="brand-sub"> Management</div>
       </div>
     </div>
+      <nav class="nav">
+        <button class="nav-item" onclick="window.location.href='{% url 'courses_page' %}'"> 
+           <img src="{% static 'images/icon-park_book-one.svg' %}"class="brand-logo-small" alt="Manage Courses">
+          Manage Courses
+        </button>
+        <button class="nav-item active">
+          <img src="{% static 'images/carbon_id-management.svg' %}" class="brand-logo-small" alt="Unit Settings">
+          Unit Settings
+        </button>
+      </nav>
 
-    <nav class="nav">
-      <a href="{% url 'courses_page' %}" class="nav-item">Manage Courses</a>
-      <a href="{% url 'student_unit_manager' %}" class="nav-item active">Unit Settings</a>
-    </nav>
   </aside>
 
   <!-- MAIN -->
   <main class="main">
 
     <header class="main-header">
-      <h2>Unit Settings</h2>
+<h2 class="title-with-logo">
+  <img src="{% static 'images/carbon_id-management.svg' %}" class="title-icon" alt="Unit Settings">
+  Unit Settings
+</h2>
     </header>
 
     <section class="card">
       <div class="form-row">
         <label>Minimum Units</label>
-        <input type="number" id="minUnits" min="0">
+        <input type="number" id="minUnits" min="1">
       </div>
 
       <div class="form-row">
         <label>Maximum Units</label>
-        <input type="number" id="maxUnits" min="0">
+        <input type="number" id="maxUnits" min="1">
       </div>
 
       <div class="form-actions">
