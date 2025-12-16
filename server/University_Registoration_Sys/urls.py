@@ -8,7 +8,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenBlacklistView,
 )
-from accounts.views import CustomLoginView, CustomLogoutView
+from accounts.views import CustomLoginView, CustomLogoutAPIView 
 
 urlpatterns = [
     
@@ -27,8 +27,7 @@ urlpatterns = [
 
     path('api/sessions/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     #delete for logout
-    path('api/sessions/current/', CustomLogoutView.as_view(), name='logout'),
-
+    path('api/sessions/current/', CustomLogoutAPIView.as_view(), name='logout'),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
 
      path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
