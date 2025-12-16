@@ -17,6 +17,19 @@ async function loadCourses() {
   }
 }
 
+function getPrerequisiteTitles(prereqIds = []) {
+  if (!prereqIds.length) return "-";
+
+  return prereqIds
+    .map(id => {
+      const course = allCourses.find(c => c.id === id);
+      return course
+        ? `${course.title} [${course.course_code}]`
+        : `#${id}`;
+    })
+    .join(" , ");
+}
+
 // Render table
 function renderCourses(filter = "") {
   coursesTbody.innerHTML = "";
@@ -31,21 +44,29 @@ function renderCourses(filter = "") {
     emptyState.style.display = "block";
     return;
   }
+  
 
   emptyState.style.display = "none";
 
   filtered.forEach(c => {
     const tr = document.createElement("tr");
 
+       const times = c.time_slots_details?.length
+      ? c.time_slots_details
+          .map(
+            t =>
+              `${t.day_display} ${t.start_time.slice(0,5)}-${t.end_time.slice(0,5)}`
+          )
+          .join("<br>")
+      : "-";
+
     tr.innerHTML = `
       <td>${c.title}</td>
       <td>${c.course_code}</td>
       <td>${c.capacity}</td>
       <td>${c.units}</td>
-      <td>${c.day_of_week}</td>
-      <td>${c.location}</td>
-      <td>${c.start_time}</td>
-      <td>${c.end_time}</td>
+      <td>${times}</td>
+      <td>${c.location || "-"}</td>
       <td>${c.prerequisites?.join(", ")}</td>
     `;
 
