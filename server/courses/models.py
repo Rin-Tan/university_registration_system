@@ -1,5 +1,5 @@
 from django.db import models
-
+from accounts.models import Profile
 class TimeSlot(models.Model):
 
     DAYS_OF_WEEK = (
@@ -30,8 +30,12 @@ class Course(models.Model):
     location = models.CharField(max_length=100)
     time_slots = models.ManyToManyField(TimeSlot)
     prerequisites = models.ManyToManyField("self", blank=True, symmetrical=False)
-    #professor = models.ForeignKey(Professor,on_delete=models.SET_NULL, null= True)
-    
+    professor = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, related_name='courses_taught')   
+    students = models.ManyToManyField(
+        Profile, 
+        related_name='enrolled_courses', # برای استفاده در سمت Profile
+        blank=True
+    )
 
     def __str__(self):
         return f'{self.title} - {self.course_code}'
