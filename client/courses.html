@@ -24,18 +24,18 @@
         <img src="{% static 'images/admin logo.svg' %}" class="brand-logo" alt="Admin Logo">
         <div>
           <div class="brand-title">Admin Dashboard</div>
-          <div class="brand-sub">Course Management</div>
+          <div class="brand-sub"> Management</div>
         </div>
       </div>
 
       <nav class="nav">
-        <button class="nav-item" onclick="window.location.href='{% url 'dashboard' %}'"> 
-           <img src="{% static 'images/streamline-flex-color_dashboard-3-flat.svg' %}" class="brand-logo-small" alt="Dashboard">
-          Dashboard
-        </button>
-        <button class="nav-item active">
-          <img src="{% static 'images/icon-park_book-one.svg' %}" class="brand-logo-small" alt="Manage Courses">
+        <button class="nav-item active" > 
+           <img src="{% static 'images/icon-park_book-one.svg' %}"class="brand-logo-small" alt="Manage Courses">
           Manage Courses
+        </button>
+        <button class="nav-item " onclick="window.location.href='{% url 'student_unit_manager' %}'">
+          <img src="{% static 'images/carbon_id-management.svg' %}" class="brand-logo-small" alt="Unit Settings">
+          Unit Settings
         </button>
       </nav>
     </aside>
