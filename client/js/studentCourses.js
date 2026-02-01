@@ -68,11 +68,27 @@ function renderCourses(filter = "") {
       <td>${times}</td>
       <td>${c.location || "-"}</td>
       <td>${c.prerequisites?.join(", ")}</td>
+      <td data-label="Actions" class="actions-cell">
+      <button
+      class="action-btn icon-btn add-lesson-btn"
+      data-course-id="${c.id}"
+      title="Add Lesson">
+      <img src="/static/images/icon-plus.svg" alt="Add Lesson" />
+      </button>
+      </td>
     `;
 
     coursesTbody.appendChild(tr);
   });
 }
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("add-lesson-btn")) {
+    const courseId = e.target.dataset.courseId;
+
+    console.log("Add lesson to course:", courseId);
+  }
+});
+
 
 // Search
 searchInput.addEventListener("input", () => renderCourses(searchInput.value));

@@ -6,6 +6,7 @@
   <title>Courses Management</title>
   <link rel="stylesheet" href="{% static 'css/common.css' %}">
   <link rel="stylesheet" href="{% static 'css/courses.css' %}">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -87,7 +88,7 @@
         </h3>
         <button id="closeModal" class="modal-close">✕</button>
       </div>
-      <form id="courseForm" class="modal-body">
+     <form id="courseForm" class="modal-body" action="javascript:void(0);">
         <div class="form-row"><label>Course Name</label><input id="title" required></div>
         <div class="form-row"><label>Course Code</label><input id="course_code" required></div>
         <div class="form-row"><label>Capacity</label><input id="capacity" type="number" min="1" required></div>
@@ -118,11 +119,7 @@
 
   <script src="{% static 'js/courses.js' %}"></script>
   
-<script>
-  if (!localStorage.getItem("access_token")) {
-    window.location.href = "/";
-  }
-</script>
+
 <div id="notification" class="notification hidden"></div>
 
 </body>

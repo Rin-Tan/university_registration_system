@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from main.views import LoginRenderView, StudentCourseView, StudentUnitManagerView
+from main.views import LoginRenderView, StudentCourseView, StudentUnitManagerView, StudentMyCoursesView
 from courses import views 
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework_simplejwt.views import (
@@ -18,9 +18,16 @@ urlpatterns = [
     
     path('courses/', include('courses.urls')), 
     
-    path('dashboard/', include('main.urls')),
+    path('professor_courses/', include('main.urls')),
+
+    path('studentMyCourses/', include('main.urls')),
+
+
+    path('accounts/', include('accounts.urls')),
     
     path('student/courses', StudentCourseView.as_view(), name='student_courses'),
+
+    path('student/mycourses', StudentMyCoursesView.as_view(), name='studentMyCourses'),
 
     path('unit_manager/', StudentUnitManagerView.as_view(), name='student_unit_manager'),  
 

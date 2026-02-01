@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views import View
 
-def dashboard(request):
-    return render(request, 'dashboard.html')
+def professor_courses(request):
+    return render(request, 'professor_courses.html')
+
 
 class StudentUnitManagerView(View):
     def get(self, request):
@@ -12,6 +13,10 @@ class StudentUnitManagerView(View):
 class StudentCourseView(View):
     def get(self, request):
         return render(request, 'studentCourses.html')
+    
+class StudentMyCoursesView(View):
+    def get(self, request):
+        return render(request, 'studentMyCourses.html')
 
 class LoginRenderView(View):
     def get(self, request):

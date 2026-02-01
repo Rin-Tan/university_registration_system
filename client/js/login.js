@@ -52,27 +52,21 @@ if (!captchaResponse) {
    }
 
 
+    localStorage.setItem("access_token", data.access);
+    localStorage.setItem("refresh_token", data.refresh);
+    localStorage.setItem("role", data.role);
 
-
-    // Store JWT tokens in localStorage
-localStorage.setItem("access_token", data.access);
-localStorage.setItem("refresh_token", data.refresh);
-document.cookie = `access_token=${data.access}; path=/`;
-
-
-
-
-    // Redirect after success
-    errorBox.style.color = "blue";
+    errorBox.style.color = "green";
     errorBox.textContent = "Login successful! Redirecting...";
+
     setTimeout(() => {
-     window.location.href = "/dashboard/";
-    }, 700);
+      window.location.href = data.redirect;  
+    }, 600);
+console.log("LOGIN RESPONSE:", data);
 
   } catch (error) {
-    // If API server is unreachable
     errorBox.style.color = "red";
     errorBox.textContent = "Could not connect to server.";
-    console.error("Login error:", error);
+    console.error(error);
   }
 });

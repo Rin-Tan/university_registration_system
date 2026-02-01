@@ -2,17 +2,20 @@
 from django.db import models
 from django.contrib.auth.models import User 
 
-ROLE_CHOICES = (
+class Profile(models.Model):
+
+    ROLE_CHOICES = (
     ('manager', 'مدیر'),
     ('teacher', 'استاد'),
     ('student', 'دانشجو'),
 )
 
-class Profile(models.Model):
-
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='student')
+
+    min_units = models.PositiveIntegerField(default=0)
+    max_units = models.PositiveIntegerField(default=20)
     
     
     def __str__(self):
